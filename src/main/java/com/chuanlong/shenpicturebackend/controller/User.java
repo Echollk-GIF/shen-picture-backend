@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.chuanlong.shenpicturebackend.demos.web;
+package com.chuanlong.shenpicturebackend.controller;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
