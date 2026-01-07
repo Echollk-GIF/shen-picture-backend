@@ -4,8 +4,9 @@ import com.chuanlong.shenpicturebackend.common.BaseResponse;
 import com.chuanlong.shenpicturebackend.common.ResultUtils;
 import com.chuanlong.shenpicturebackend.exception.ErrorCode;
 import com.chuanlong.shenpicturebackend.exception.ThrowUtils;
-import com.chuanlong.shenpicturebackend.model.dto.UserLoginRequest;
-import com.chuanlong.shenpicturebackend.model.dto.UserRegisterRequest;
+import com.chuanlong.shenpicturebackend.model.dto.user.UserLoginRequest;
+import com.chuanlong.shenpicturebackend.model.dto.user.UserRegisterRequest;
+import com.chuanlong.shenpicturebackend.model.entity.User;
 import com.chuanlong.shenpicturebackend.model.vo.LoginUserVO;
 import com.chuanlong.shenpicturebackend.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,12 @@ public class UserController {
         return ResultUtils.success(result);
     }
 
+    /**
+     * 用户登录
+     * @param userLoginRequest
+     * @param request
+     * @return
+     */
     @PostMapping("/login")
     public BaseResponse<LoginUserVO> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(userLoginRequest == null, ErrorCode.PARAMS_ERROR);
@@ -42,6 +49,29 @@ public class UserController {
         return ResultUtils.success(loginUserVO);
     }
 
+    /**
+     * 获取当前登录用户
+     * @param request
+     * @return
+     */
+    @GetMapping("/get/login")
+    public BaseResponse<LoginUserVO> getLoginUser(HttpServletRequest request) {
+        User user = userService.getLoginUser(request);
+        return ResultUtils.success(userService.getLoginUserVO(user));
+    }
+
+
+    /**
+     * 用户注销（退出登录）
+     * @param request
+     * @return
+     */
+    @PostMapping("/logout")
+    public BaseResponse<Boolean> userLogout(HttpServletRequest request) {
+        ThrowUtils.throwIf(request == null, ErrorCode.PARAMS_ERROR);
+        boolean result = userService.userLogout(request);
+        return ResultUtils.success(result);
+    }
 
 }
 

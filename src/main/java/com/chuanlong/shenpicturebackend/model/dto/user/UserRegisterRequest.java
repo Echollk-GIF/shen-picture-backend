@@ -1,4 +1,4 @@
-package com.chuanlong.shenpicturebackend.model.dto;
+package com.chuanlong.shenpicturebackend.model.dto.user;
 
 import lombok.Data;
 
