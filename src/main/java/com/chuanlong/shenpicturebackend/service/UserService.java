@@ -2,6 +2,9 @@ package com.chuanlong.shenpicturebackend.service;
 
 import com.chuanlong.shenpicturebackend.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.chuanlong.shenpicturebackend.model.vo.LoginUserVO;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
 * @author echollk
@@ -27,6 +30,25 @@ public interface UserService extends IService<User> {
      * @return 加密后的密码
      */
     String getEncryptPassword(String userPassword);
+
+    /**
+     * 用户登录
+     *
+     * @param userAccount  用户账户
+     * @param userPassword 用户密码
+     * @param request httpRequest 请求方便设置 cookie
+     * @return 脱敏后的用户信息
+     */
+    LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
+
+
+    /**
+     * 获取脱敏的已登录用户信息
+     *
+     * @return 脱敏的已登录用户信息
+     */
+    LoginUserVO getLoginUserVO(User user);
+
 }
 
 
